@@ -27,6 +27,9 @@ namespace Daily_plan
             NowDateTextBlock.Text = $"{DateTime.Today:d MMMM yyyy}";
             DayToday = $"{DateTime.Today:dd MM yyyy}";
             //DayToday = "23 11 2025"; // clear this
+            // new estb???
+
+
 
             TimeCounting();
             UpdateTasks();
