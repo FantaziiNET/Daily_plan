@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -34,11 +33,6 @@ namespace Daily_plan
 
 
             Save();
-
-
-
-            //foreach (var plan in PlanList)
-            //    PlanTextBolck.Text += $"{plan}\n";
 
             #region test Properties.Settings.Default
             //foreach (var plan in BreakBetweenTasks)
@@ -93,9 +87,9 @@ namespace Daily_plan
             if (sender is CheckBox cb)
             {
                 cb.Visibility = Visibility.Collapsed;
-                foreach (string name in PlanList)
+                foreach (string? name in PlanList)
                 {
-                    if (cb.Content == name)
+                    if ((string)cb.Content == name)
                     {
                         DaysToCompleteTasks[id] = BreakBetweenTasks[id];
                         break;
@@ -111,7 +105,7 @@ namespace Daily_plan
             StringCollection strings = [];
             int id = 0;
 
-            foreach (string days in DaysToCompleteTasks)
+            foreach (string? days in DaysToCompleteTasks)
             {
                 int day = Convert.ToInt32(days) + DaysLater;
                 strings.Add($"{day}");
