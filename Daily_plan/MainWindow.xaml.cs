@@ -25,22 +25,16 @@ namespace Daily_plan
             InitializeComponent();
             NowDateTextBlock.Text = $"{DateTime.Today:d MMMM yyyy}";
             DayToday = $"{DateTime.Today:dd MM yyyy}";
-            //DayToday = "23 11 2025";
-
+            
             TimeCounting();
             UpdateTasks();
 
 
 
             Save();
-
-            #region test Properties.Settings.Default
-            //foreach (var plan in BreakBetweenTasks)
-            //    PlanTextBolck.Text += $"{plan}\n";
-
-            //foreach (var plan in DaysToCompleteTasks)
-            //    PlanTextBolck.Text += $"{plan}\n";
-
+            #region primer
+            //DayToday = "10 11 2025";
+            //LastUpdateDate = DayToday;
             //PlanList =
             //[
             //    "• Помыть посуду",
@@ -65,6 +59,16 @@ namespace Daily_plan
             //    "0",
             //    "0",
             //];
+            #endregion
+
+            #region test Properties.Settings.Default
+            //foreach (var plan in BreakBetweenTasks)
+            //    PlanTextBolck.Text += $"{plan}\n";
+
+            //foreach (var plan in DaysToCompleteTasks)
+            //    PlanTextBolck.Text += $"{plan}\n";
+
+
             //DaysToCompleteTasks = Properties.Settings.Default.DaysToCompleteTasks;
             //BreakBetweenTasks = Properties.Settings.Default.BreakBetweenTasks;
             //Properties.Settings.Default.Save();

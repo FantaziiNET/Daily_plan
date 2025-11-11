@@ -10,7 +10,7 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        
+
         <FontFamily x:Key="CustomFont">#AdventureIndianaJones</FontFamily>
 
         <SolidColorBrush x:Key="MainColor" Color="#a1a1f1"/>
@@ -53,10 +53,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <!--<TextBlock x:Name="PlanTextBlock" FontFamily="{StaticResource CustomFont}"
-                   Margin="10,100,0,0" FontSize="26" FontWeight="DemiBold" Foreground="{StaticResource MainColor}"
-                   VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap"
-        />-->
 
         <Border x:Name="NewTask" CornerRadius="20" Height="55" Width="200" Background="#999999"
                 HorizontalAlignment="Right" VerticalAlignment="Bottom"
@@ -66,15 +62,22 @@
                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
-        <StackPanel x:Name="NewTaskStackPanel" Height="250" Width="280" Background="White"
+        <Canvas x:Name="NewTaskStackPanel" Height="178" Width="280" Background="White"
                     HorizontalAlignment="Right" VerticalAlignment="Top"
-                    Visibility="Collapsed">
+                    Visibility="Visible">
             <TextBlock Text="Название задачи:" Style="{StaticResource NewTaskTextBlockStyle}"/>
-            <TextBox x:Name="TaskNameTextBox" Style="{StaticResource NewTaskTextBoxStyle}"/>
-            <TextBlock Text="Повторение через(дней):" Style="{StaticResource NewTaskTextBlockStyle}"/>
-            <TextBox  Style="{StaticResource NewTaskTextBoxStyle}"/>
-            <Button x:Name="SaveTaskButton" Content="Сохранить" Style="{StaticResource NewTaskButtonStyle}"
-                    Click="SaveTaskButton_Click" Width="150"/>
-        </StackPanel>
+            <TextBox x:Name="NewTaskNameTextBox" Style="{StaticResource NewTaskTextBoxStyle}"
+                     Canvas.Top="25"/>
+            <TextBox x:Name="NewTaskDayTextBox"  Style="{StaticResource NewTaskTextBoxStyle}" Width="115"
+                     Canvas.Top="80" Canvas.Left="95"/>
+            <TextBlock Text="Через сколько дней повторить:" TextWrapping="Wrap" Height="68" 
+                       Style="{StaticResource NewTaskTextBlockStyle}" Canvas.Top="55"/>
+            <Button x:Name="SaveNewTaskButton" Content="Сохранить" Style="{StaticResource NewTaskButtonStyle}"
+                    Click="SaveTaskButton_Click" Width="150" Canvas.Bottom="10" Canvas.Left="20" IsDefault="True"
+                    Background="#999999" Foreground="#0fff9f" FontFamily="{StaticResource CustomFont}"/>
+            <Button x:Name="ClearNewTaskButton" Content="✖" Style="{StaticResource NewTaskButtonStyle}"
+                    Click="SaveTaskButton_Click" Width="30" Canvas.Bottom="10" Canvas.Left="180"
+                    Background="Red" Foreground="White" IsCancel="True"/>
+        </Canvas>
     </Grid>
 </Window>
