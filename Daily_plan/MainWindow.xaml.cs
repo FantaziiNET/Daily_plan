@@ -20,7 +20,7 @@ namespace Daily_plan
         public int DaysLater;
 
 
-        public MainWindow()
+        public MainWindow() // v 1.2
         {
             InitializeComponent();
             NowDateTextBlock.Text = $"{DateTime.Today:d MMMM yyyy}";
@@ -30,9 +30,6 @@ namespace Daily_plan
             UpdateTasks();
             LastUpdateDate = DayToday;
 
-
-
-            Save();
             #region primer
             //DayToday = "10 11 2025";
             //LastUpdateDate = DayToday;
@@ -94,8 +91,6 @@ namespace Daily_plan
                 TaskListBox.ItemsSource = null;
                 UpdateTasks();
                 ClearNewTaskStackPanel();
-
-                Save();
             }
             else
             {
@@ -176,6 +171,11 @@ namespace Daily_plan
             Properties.Settings.Default.DaysToCompleteTasks = DaysToCompleteTasks;
             Properties.Settings.Default.LastUpdateDate = LastUpdateDate;
             Properties.Settings.Default.Save();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Save();
         }
     }
 }
