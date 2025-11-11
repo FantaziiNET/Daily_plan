@@ -94,6 +94,8 @@ namespace Daily_plan
                 TaskListBox.ItemsSource = null;
                 UpdateTasks();
                 ClearNewTaskStackPanel();
+
+                Save();
             }
             else
             {
