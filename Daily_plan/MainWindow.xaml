@@ -64,19 +64,19 @@
 
         <Canvas x:Name="NewTaskStackPanel" Height="178" Width="280" Background="White"
                     HorizontalAlignment="Right" VerticalAlignment="Top"
-                    Visibility="Visible">
+                    Visibility="Collapsed">
             <TextBlock Text="Название задачи:" Style="{StaticResource NewTaskTextBlockStyle}"/>
             <TextBox x:Name="NewTaskNameTextBox" Style="{StaticResource NewTaskTextBoxStyle}"
                      Canvas.Top="25"/>
-            <TextBox x:Name="NewTaskDayTextBox"  Style="{StaticResource NewTaskTextBoxStyle}" Width="115"
-                     Canvas.Top="80" Canvas.Left="95"/>
             <TextBlock Text="Через сколько дней повторить:" TextWrapping="Wrap" Height="68" 
                        Style="{StaticResource NewTaskTextBlockStyle}" Canvas.Top="55"/>
+            <TextBox x:Name="NewTaskDayTextBox"  Style="{StaticResource NewTaskTextBoxStyle}" Width="115" MaxLength="3"
+                     Canvas.Top="80" Canvas.Left="95" PreviewTextInput="NewTaskDayTextBox_PreviewTextInput"/>
             <Button x:Name="SaveNewTaskButton" Content="Сохранить" Style="{StaticResource NewTaskButtonStyle}"
                     Click="SaveTaskButton_Click" Width="150" Canvas.Bottom="10" Canvas.Left="20" IsDefault="True"
                     Background="#999999" Foreground="#0fff9f" FontFamily="{StaticResource CustomFont}"/>
             <Button x:Name="ClearNewTaskButton" Content="✖" Style="{StaticResource NewTaskButtonStyle}"
-                    Click="SaveTaskButton_Click" Width="30" Canvas.Bottom="10" Canvas.Left="180"
+                    Width="30" Canvas.Bottom="10" Canvas.Left="180" Click="ClearNewTaskButton_Click"
                     Background="Red" Foreground="White" IsCancel="True"/>
         </Canvas>
     </Grid>

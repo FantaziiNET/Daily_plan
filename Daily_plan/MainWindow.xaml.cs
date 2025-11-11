@@ -25,9 +25,10 @@ namespace Daily_plan
             InitializeComponent();
             NowDateTextBlock.Text = $"{DateTime.Today:d MMMM yyyy}";
             DayToday = $"{DateTime.Today:dd MM yyyy}";
-            
+
             TimeCounting();
             UpdateTasks();
+            LastUpdateDate = DayToday;
 
 
 
@@ -37,11 +38,11 @@ namespace Daily_plan
             //LastUpdateDate = DayToday;
             //PlanList =
             //[
-            //    "• Помыть посуду",
-            //    "• Пропылесосить",
-            //    "• Влажная уборка",
-            //    "• Постирать",
-            //    "• Побриться",
+            //    "Помыть посуду",
+            //    "Пропылесосить",
+            //    "Влажная уборка",
+            //    "Постирать",
+            //    "Побриться",
             //];
             //BreakBetweenTasks =
             //[
@@ -82,7 +83,40 @@ namespace Daily_plan
 
         private void SaveTaskButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!PlanList.Contains(NewTaskNameTextBox.Text) && !String.IsNullOrEmpty(NewTaskNameTextBox.Text)
+                && !String.IsNullOrEmpty(NewTaskDayTextBox.Text))
+            {
+                PlanList.Add(NewTaskNameTextBox.Text);
+                BreakBetweenTasks.Add(NewTaskDayTextBox.Text);
+                DaysToCompleteTasks.Add("0");
+
+                TasksToday.Clear();
+                TaskListBox.ItemsSource = null;
+                UpdateTasks();
+                ClearNewTaskStackPanel();
+            }
+            else
+            {
+                MessageBox.Show("Возникла ошибка! Возможно такая задаяча уже есть или вы не заполнили поле", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Information);
+                NewTaskNameTextBox.Text = "";
+            }
+        }
+
+        private void ClearNewTaskStackPanel()
+        {
+            NewTaskNameTextBox.Text = "";
+            NewTaskDayTextBox.Text = "";
             NewTaskStackPanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void ClearNewTaskButton_Click(object sender, RoutedEventArgs e)
+        {
+            ClearNewTaskStackPanel();
+        }
+
+        private void NewTaskDayTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.All(char.IsDigit);
         }
 
         private void TaskCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -115,6 +149,7 @@ namespace Daily_plan
                 strings.Add($"{day}");
                 id++;
             }
+
             DaysToCompleteTasks = strings;
         }
 
@@ -130,8 +165,6 @@ namespace Daily_plan
             }
 
             TaskListBox.ItemsSource = TasksToday;
-
-            LastUpdateDate = DayToday;
         }
 
         public void Save()
