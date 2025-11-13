@@ -12,7 +12,7 @@ namespace Daily_plan
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly string _path = "../../../fonts/Save Data/data.txt";//"../Save Data/data.txt";
+        private readonly string _path = "../../../Save Data/data.txt";//"../Save Data/data.txt";
 
         public List<string> TasksToday = [];
         public string DayToday;
@@ -24,7 +24,7 @@ namespace Daily_plan
         public string? LastUpdateDate = Settings.Default.LastUpdateDate;
 
 
-        public MainWindow() // v 1.4.1
+        public MainWindow() // v 1.4.2
         {
             InitializeComponent();
             NowDateTextBlock.Text = $"{DateTime.Today:d MMMM yyyy}";
