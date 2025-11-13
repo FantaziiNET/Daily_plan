@@ -1,4 +1,5 @@
 ﻿using System.Collections.Specialized;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,21 +11,24 @@ namespace Daily_plan
     /// </summary>
     public partial class MainWindow : Window
     {
-        public StringCollection PlanList = Properties.Settings.Default.PlanList;
-        public StringCollection BreakBetweenTasks = Properties.Settings.Default.BreakBetweenTasks;
-        public StringCollection DaysToCompleteTasks = Properties.Settings.Default.DaysToCompleteTasks;
+        private string _path = "../Save Data/data.txt";
 
         public List<string> TasksToday = [];
-        public string LastUpdateDate = Properties.Settings.Default.LastUpdateDate;
         public string DayToday;
         public int DaysLater;
 
+        public StringCollection PlanList = Properties.Settings.Default.PlanList;
+        public StringCollection BreakBetweenTasks = Properties.Settings.Default.BreakBetweenTasks;
+        public StringCollection DaysToCompleteTasks = Properties.Settings.Default.DaysToCompleteTasks;
+        public string? LastUpdateDate = Properties.Settings.Default.LastUpdateDate;
 
-        public MainWindow() // v 1.2
+
+        public MainWindow() // v 1.3
         {
             InitializeComponent();
             NowDateTextBlock.Text = $"{DateTime.Today:d MMMM yyyy}";
             DayToday = $"{DateTime.Today:dd MM yyyy}";
+            //Read(_path);
 
             TimeCounting();
             UpdateTasks();
@@ -136,7 +140,16 @@ namespace Daily_plan
 
         public void TimeCounting()
         {
-            DaysLater = (Convert.ToDateTime(LastUpdateDate) - Convert.ToDateTime(DayToday)).Days;
+            try
+            {
+                DaysLater = (Convert.ToDateTime(LastUpdateDate) - Convert.ToDateTime(DayToday)).Days;
+            }
+            catch
+            {
+                Read(_path);
+                DaysLater = (Convert.ToDateTime(LastUpdateDate) - Convert.ToDateTime(DayToday)).Days;
+            }
+
             StringCollection strings = [];
             int id = 0;
 
@@ -171,6 +184,35 @@ namespace Daily_plan
             Properties.Settings.Default.DaysToCompleteTasks = DaysToCompleteTasks;
             Properties.Settings.Default.LastUpdateDate = LastUpdateDate;
             Properties.Settings.Default.Save();
+            File.Delete(_path);
+            Write(_path);
+        }
+
+        public void Write(string path)
+        {
+            using StreamWriter writer = new(path);
+
+            foreach (string? task in PlanList)
+            {
+                writer.WriteLine(task);
+            }
+            writer.WriteLine("+++1");
+            foreach (string? day in BreakBetweenTasks)
+            {
+                writer.WriteLine(day);
+            }
+            writer.WriteLine("+++2");
+            foreach (string? day in DaysToCompleteTasks)
+            {
+                writer.WriteLine(day);
+            }
+            writer.WriteLine("+++3");
+            writer.WriteLine(LastUpdateDate);
+            writer.WriteLine("+++4");
+        }
+
+        public void Read(string path)
+        {
         }
 
         private void Window_Closed(object sender, EventArgs e)

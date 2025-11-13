@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36121.58
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daily plan", "Daily_plan\Daily plan.csproj", "{5C7BDE45-3821-4D15-BE3F-98D43AB32EA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daily Plan", "Daily_plan\Daily Plan.csproj", "{5C7BDE45-3821-4D15-BE3F-98D43AB32EA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
